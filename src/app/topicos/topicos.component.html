@@ -1,0 +1,54 @@
+<app-menu-lateral></app-menu-lateral>
+<div class="main">
+    <h4 class="text-light">Tópicos de interesse</h4>
+    <hr style="border: 1px solid whitesmoke;">
+    
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Pesquisar tópico de interesse..." [(ngModel)]="searchText">
+    </div>
+    
+    <div class="container row">  
+        <div class="col-md-6 bg-light rounded">        
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Tópicos</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let i of glossarios | filter: searchText | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <tr>
+                        <td>{{i}}</td>
+                        <td>
+                            <button class="btn btn-dark" (click)="adicionar(i)">Adicionar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Próximo"
+                (pageChange)="p = $event"></pagination-controls>
+        </div>
+        
+        <div class="col-md-6">
+            <div  class="alert alert-info">
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th scope="col">Meus interesses</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let i of selecionados">
+                            <td *ngIf="!jaTemInteresse">{{i}}</td>
+                            <td *ngIf="!jaTemInteresse">
+                                <button class="btn btn-dark" (click)="remover(i)">Remover</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

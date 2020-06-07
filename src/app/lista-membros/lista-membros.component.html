@@ -1,0 +1,26 @@
+<app-menu-lateral></app-menu-lateral>
+<div class="main">
+    <h4 class="text-light">Membros do CienTwitter</h4>
+    <hr style="border: 1px solid whitesmoke;">
+    
+    <div *ngIf="temMembros" class="container">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Tente buscar por pessoas, tópicos ou palavras-chave"
+                [(ngModel)]="searchText">
+        </div>
+        <div *ngFor="let m of membros | filter: searchText">
+            <div class="card m-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{m.informacao?.nomePessoa}}</h5>
+                    <p class="card-text"><b>Nivel de formação: </b>{{m.formacao?.nivelDeFormacao}}</p>
+                    <p class="card-text"><b>Local de formação: </b>{{m.formacao?.localDeFormacao}}</p>
+                    <button class="btn btn-primary" (click)="goToPerfil(m.informacao.email)">Ver perfil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div *ngIf="!temMembros" class="container">
+        <h3 class="text-light">Por enquanto não existem outros membros cadastrados em nossa rede social. :(</h3>
+    </div>
+</div>

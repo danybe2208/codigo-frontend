@@ -1,0 +1,122 @@
+<app-menu-lateral></app-menu-lateral>
+<div class="main text-dark">
+    <h4 class="text-light">Perfil de {{informacao?.nomePessoa}}</h4>
+    <hr style="border: 1px solid whitesmoke;">
+
+    
+    <div class="container row">
+        <div class="col-md-6">
+            <div class="container" *ngIf="listaPostPessoa">
+                <h4 class="mb-3 text-light">Posts</h4>
+                
+                <div *ngFor="let p of listaPostPessoa">
+                    <div class="card">
+                        <div class="card-header">
+                            <b>
+                                {{p.conteudo.titulo}}
+                            </b>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{p.conteudo.conteudo}}</p>
+                        </div>
+                        <div class="card-footer text-muted">
+                            {{p.conteudo.localDaPublicacao}} - {{p.conteudo.anoDaPublicacao}}
+                            <br>
+                            Curtido por {{p.curtidas}} membros
+                            <div class="float-right">                                
+                                <button type="button" class="btn btn-info"
+                                (click)="botaoDeCurtir(p)">{{p.status}} post</button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <div *ngIf="!temPost">
+                <h5 class="text-light">Não há posts desse usuário</h5>
+            </div>
+        </div>
+
+        <div class="col-md-6" class="text-light">
+            <div *ngIf="cientista">
+                <span><b>Contato: </b>{{informacao?.email}}</span><br>
+                <span><b>Nivel de formação:</b> {{formacao?.nivelDeFormacao}}</span><br>
+                <span><b>Local de formação:</b> {{formacao?.localDeFormacao}}</span><br>
+                <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
+                <span><b>Tempo como cientista: </b>{{tempoEmAtividade}}</span><br>
+                <span><b>Nome da instituição: </b>{{trabalho?.nomeInstituicao}}</span><br>
+                <span><b>Local da instituição: </b>{{trabalho?.cidadeOndeTrabalha}} -
+                    {{trabalho?.estadoOndeTrabalha}}</span><br>
+                <span><b>Curriculo Lattes: </b>{{curriculo?.url}}</span><br>
+            </div>
+            <div *ngIf="!cientista">
+                <span><b>Contato:</b> {{informacao?.email}}</span><br>
+                <span><b>Nivel de formação: </b>{{formacao?.nivelDeFormacao}}</span><br>
+                <span><b>Local de formação: </b>{{formacao?.localDeFormacao}}</span><br>
+                <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
+            </div>
+
+            <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#seguindo">
+                Seguindo
+            </button>
+            <button type="button" class="btn btn-block btn-secondary"
+             data-toggle="modal" data-target="#seguidores">
+                Seguidores
+            </button>
+
+            <button *ngIf="!seguir" class="btn btn-block btn-info my-3" (click)="follow(pessoa.id)">Seguir</button>
+            <button *ngIf="seguir" class="btn btn-block btn-dark my-3" (click)="undoFollow(pessoa.id)">Deixar de seguir</button>
+
+            <h6 class="mt-3 text-light">Interesses:</h6>
+            <div *ngIf="temInteresses">
+                <ul class="list-group" *ngFor="let x of interesses;">
+                    <li class="list-group-item text-dark">{{x}}</li>
+                </ul>
+            </div>
+            <div *ngIf="!temInteresses" class="text-light">
+                <span><b>Não há topicos cadastrados.</b></span><br>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Modal Seguindo-->
+<div id="seguindo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Seguindo</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>                
+            </div>
+            <div class="modal-body" *ngFor="let i of seguindo">
+                <span class="float-left">{{i.informacao?.nomePessoa}}</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Modal Seguidores-->
+<div id="seguidores" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Seguidores</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>                
+            </div>
+            <div class="modal-body" *ngFor="let i of seguidores">
+                <span class="float-left">{{i.informacao?.nomePessoa}}</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>

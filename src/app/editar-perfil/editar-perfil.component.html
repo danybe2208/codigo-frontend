@@ -1,0 +1,60 @@
+<app-menu-lateral></app-menu-lateral>
+
+<div class="main">
+    <h4 class="text-light">Meu perfil</h4>
+    <hr style="border: 1px solid whitesmoke;">
+    
+    <div class="container text-light">
+        <div *ngIf="atualizado" class="alert alert-success">
+            Atualizado com sucesso.
+        </div>
+        <form *ngIf="!atualizado" ngNativeValidate>
+            <div class="form-group row">
+                <label for="nomePessoa">Nome:</label>
+                <input id="nomePessoa" type="text" [(ngModel)]="informacao.nomePessoa" class="form-control" name="nomePessoa" required="true">
+            </div>
+            <div class="form-group row">
+                <label for="senha">Senha:</label>
+                <input id="senha" type="password" [(ngModel)]="informacao.senha" class="form-control" name="senha" required="true">
+            </div>
+            <div class="form-group row">
+                <label for="nivelDeFormacao">Nível de Formação:</label>
+                <input id="nivelDeFormacao" type="text" [(ngModel)]="formacao.nivelDeFormacao" class="form-control" name="nivelDeFormacao" required="true">
+            </div>
+            <div class="form-group row">
+                <label for="localDeFormacao">Local de Formação:</label>
+                <input id="localDeFormacao" type="text" [(ngModel)]="formacao.localDeFormacao" class="form-control" name="localDeFormacao" required="true">
+            </div>
+            <div class="form-group row">
+                <label for="dataNascimento">Data de Nascimento:</label>
+                <input id="dataNascimento" type="date" [(ngModel)]="infoAdicionais.dataNascimento" class="form-control"
+                    name="dataNascimento" required="true">
+            </div>
+    
+            <div *ngIf="cientista" class="form-group row">
+                <label for="nomeInstituicao">Nome da instituição onde trabalha:</label>
+                <input id="nomeInstituicao" type="text" [(ngModel)]="trabalho.nomeInstituicao" class="form-control" name="nomeInstituicao" required="true">
+            </div>
+            <div *ngIf="cientista" class="form-group row">
+                <label for="cidadeOndeTrabalha">Cidade da instituição:</label>
+                <input id="cidadeOndeTrabalha" type="text" [(ngModel)]="trabalho.cidadeOndeTrabalha" class="form-control" name="cidadeOndeTrabalha" required="true">
+            </div>
+            <div *ngIf="cientista" class="form-group row">
+                <label for="estadoOndeTrabalha">Estado da instituição:</label>
+                <input id="estadoOndeTrabalha" type="text" [(ngModel)]="trabalho.estadoOndeTrabalha" class="form-control" name="estadoOndeTrabalha" required="true">
+            </div>
+            <div *ngIf="cientista" class="form-group row">
+                <label for="dataInicioCientista">Data em que começou a trabalhar como cientista:</label>
+                <input id="dataInicioCientista" type="date" [(ngModel)]="infoAdicionais.dataInicioCientista" class="form-control" name="dataInicioCientista" required="true">
+            </div>
+            <div *ngIf="cientista" class="form-group row">
+                <label for="curriculo">Curriculo Lattes:</label>
+                <input id="curriculo" type="url" [(ngModel)]="curriculo.url" class="form-control" name="curriculo" required="true">
+            </div>
+    
+            <div class="form-group row">
+                <button class="btn btn-dark" (click)="confirmarAtualizacao()">Confirmar</button>
+            </div>
+        </form>
+    </div>    
+</div>

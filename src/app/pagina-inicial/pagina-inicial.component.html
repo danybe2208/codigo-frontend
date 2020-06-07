@@ -1,0 +1,95 @@
+<app-menu-lateral></app-menu-lateral>
+
+<div class="main">
+    <h4 class="text-light">Página Inicial</h4>
+    <hr style="border: 1px solid whitesmoke;">
+    
+    <div class="container row">
+        <div class="col-md-8 text-light">
+            <h5 class="mb-3">Post</h5>
+            <app-post></app-post>
+        </div>
+    
+        <div class="col-md-4">
+            <h5 class="mb-3 text-light">Meu perfil</h5>
+            <div *ngIf="cientista" class=" text-light">
+                <span><b>{{informacao?.nomePessoa}}</b></span><br>
+                <span><b>{{informacao?.email}}</b></span><br>
+                <span><b>Nivel de formação: </b>{{formacao?.nivelDeFormacao}}</span><br>
+                <span><b>Local de formação: </b>{{formacao?.localDeFormacao}}</span><br>
+                <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
+                <span><b>Tempo como cientista: </b>{{tempoEmAtividade}}</span><br>
+                <span><b>Nome da instituição: </b>{{trabalho?.nomeInstituicao}}</span><br>
+                <span><b>Local da instituição: </b>{{trabalho?.cidadeOndeTrabalha}} -
+                    {{trabalho?.estadoOndeTrabalha}}</span><br>
+                <span><b>Curriculo Lattes:</b> {{curriculo?.url}}</span><br>
+            </div>
+            <div *ngIf="!cientista" class=" text-light">
+                <span><b>{{informacao?.nomePessoa}}</b></span><br>
+                <span><b>{{informacao?.email}}</b></span><br>
+                <span><b>Nivel de formação:</b> {{formacao?.nivelDeFormacao}}</span><br>
+                <span><b>Local de formação:</b> {{formacao?.localDeFormacao}}</span><br>
+                <span><b>Data de nascimento:</b> {{dataNascimento}}</span><br>
+            </div>
+
+            <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#seguindo">
+                Seguindo
+            </button>
+            <button type="button" class="btn btn-block btn-secondary"
+             data-toggle="modal" data-target="#seguidores">
+                Seguidores
+            </button>
+
+            <h6 class="mt-3 text-light">Interesses:</h6>
+            <div *ngIf="temInteresses">
+                <ul class="list-group" *ngFor="let x of interesses;">
+                    <li class="list-group-item">{{x}}</li>
+                </ul>
+            </div>
+            <div class="text-light" *ngIf="!temInteresses">
+                <span><b>Você ainda não cadastrou interesses.</b></span><br>
+                <span>Para adicionar interesse(s) <a routerLink="/topicos">clique aqui.</a></span>
+            </div>
+        </div>    
+    </div>
+</div>
+
+<!--Modal Seguindo-->
+<div id="seguindo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Seguindo</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>                
+            </div>
+            <div class="modal-body" *ngFor="let i of seguindo">
+                <span class="float-left">{{i.informacao?.nomePessoa}}</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Modal Seguidores-->
+<div id="seguidores" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Seguidores</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>                
+            </div>
+            <div class="modal-body" *ngFor="let i of seguidores">
+                <span class="float-left">{{i.informacao?.nomePessoa}}</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,132 @@
+<form (ngSubmit)="onSubmit()" ngNativeValidate>
+    <div class="container">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Titulo" name="titulo" [(ngModel)]="conteudo.titulo"
+                required="true">
+        </div>
+
+        <div class="form-group">
+            <textarea type="text" placeholder="Conteúdo" class="form-control" name="conteudo"
+                [(ngModel)]="conteudo.conteudo" required="true"></textarea>
+        </div>
+
+        <div class="form-group">
+            <input placeholder="Local da publicação" type="text" class="form-control" name="localDaPublicacao"
+                [(ngModel)]="conteudo.localDaPublicacao" required="true">
+        </div>
+
+        <div class="form-group">
+            <input placeholder="Ano da publicacao" class="form-control" type="text" name="anoDaPublicacao"
+                [(ngModel)]="conteudo.anoDaPublicacao" required="true">
+        </div>
+
+        <div class="form-group">
+            <input type="url" class="form-control" [(ngModel)]="conteudo.url" name="url"
+                placeholder="Url de referência">
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="conteudo.tags" name="tags" placeholder="Tags">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Postar</button>
+    </div>
+</form>
+
+<div class="container text-dark" *ngIf="temPost">
+    <br>
+    <div *ngFor="let p of listaPosts">
+        <div class="card">
+            <div class="card-header">
+                {{p.conteudo?.localDaPublicacao}}
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">
+                    {{p.conteudo?.titulo}}
+                </h3>
+                <p class="card-text">{{p.conteudo?.conteudo}}</p>
+            </div>
+            <div class="card-footer text-muted">
+                {{p.conteudo?.anoDaPublicacao}}
+                Curtido por {{p?.curtidas}} membros
+                <div class="btn-group float-right" role="group">
+                    <button type="button" class="btn btn-dark" (click)="getPost(p)" data-toggle="modal"
+                        data-target="#editar">Editar</button>
+
+                    <button type="button" class="btn btn-dark" (click)="getPost(p)" data-toggle="modal"
+                        data-target="#excluir">Excluir</button>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+
+<!--Modal editar-->
+<div id="editar" class="modal fade" role="dialog">
+    <div class="modal-dialog  text-dark">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar postagem</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Titulo" name="titulo"
+                        [(ngModel)]="auxConteudo.titulo" required="true">
+                </div>
+
+                <div class="form-group">
+                    <textarea type="text" placeholder="Conteúdo" class="form-control" name="conteudo"
+                        [(ngModel)]="auxConteudo.conteudo" required="true"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input placeholder="Local da publicação" type="text" class="form-control" name="localDaPublicacao"
+                        [(ngModel)]="auxConteudo.localDaPublicacao" required="true">
+                </div>
+
+                <div class="form-group">
+                    <input placeholder="Ano da publicacao" class="form-control" type="text" name="anoDaPublicacao"
+                        [(ngModel)]="auxConteudo.anoDaPublicacao" required="true">
+                </div>
+
+                <div class="form-group">
+                    <input type="url" class="form-control" [(ngModel)]="auxConteudo.url" name="url"
+                        placeholder="Url de referência">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" class="form-control" [(ngModel)]="auxConteudo.tags" name="tags"
+                        placeholder="Tags">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" (click)="editar()" data-dismiss="modal">Editar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal deletar-->
+<div id="excluir" class="modal fade" role="dialog">
+    <div class="modal-dialog text-dark">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Remover post</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja realmente excluir essa postagem?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" (click)="excluir()" data-dismiss="modal">Confirmar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
