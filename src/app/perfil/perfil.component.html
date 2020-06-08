@@ -6,35 +6,7 @@
     
     <div class="container row">
         <div class="col-md-6">
-            <div class="container" *ngIf="listaPostPessoa">
-                <h4 class="mb-3 text-light">Posts</h4>
-                
-                <div *ngFor="let p of listaPostPessoa">
-                    <div class="card">
-                        <div class="card-header">
-                            <b>
-                                {{p.conteudo.titulo}}
-                            </b>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">{{p.conteudo.conteudo}}</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            {{p.conteudo.localDaPublicacao}} - {{p.conteudo.anoDaPublicacao}}
-                            <br>
-                            Curtido por {{p.curtidas}} membros
-                            <div class="float-right">                                
-                                <button type="button" class="btn btn-info"
-                                (click)="botaoDeCurtir(p)">{{p.status}} post</button>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                </div>
-            </div>
-            <div *ngIf="!temPost">
-                <h5 class="text-light">Não há posts desse usuário</h5>
-            </div>
+            <app-lista-post></app-lista-post>
         </div>
 
         <div class="col-md-6" class="text-light">

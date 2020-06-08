@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho, Informacao } from '../model/pessoa/pessoa';
 import { PessoaService } from '../service/pessoa/pessoa.service';
 import { PostService } from '../service/post/post.service';
-import { CurtidaService } from '../service/curtida/curtida.service';
-import { Curtida } from '../model/curtida/curtida';
 import { Post } from '../model/post/post';
-import { PostPessoa } from '../model/post_pessoa/post_pessoa';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,86 +27,15 @@ export class PerfilComponent implements OnInit {
   dataNascimento: string;
   tempoEmAtividade: string;
 
-  listaPosts = [];
-  temPost: boolean;
-
-  curtida: Curtida = new Curtida();
-  jaCurtiu = false;
-  
-  status = ["Curtir", "Descurtir"]
-  listaPostPessoa = [];
-  auxPost = new Post();
-
   seguir = false;
   seguindo = [];
   seguidores = [];
 
-  constructor(private pessoaService: PessoaService, private postService: PostService, 
-    private curtidaService: CurtidaService, private router: Router) {
+  constructor(private pessoaService: PessoaService, private postService: PostService, private router: Router) {
   }
 
   ngOnInit() {
     this.getPessoa();  
-    this.like();
-  }
-
-
-  botaoDeCurtir(post: PostPessoa){
-    if (post.status === "Curtir") {
-      this.postService.getPostById(post.idDoPost).subscribe(
-        data => {
-          this.auxPost = data;
-          this.auxPost.curtidas++;
-          this.curtida.idPostCurtido = post.idDoPost;
-          this.curtida.idUsuarioCurtiu = +(localStorage.getItem("idUsuario"));
-          this.postService.atualizarPost(this.auxPost).subscribe();
-          this.curtidaService.createCurtida(this.curtida).subscribe();  
-          this.ngOnInit();   
-        }
-      )
-    } else if (post.status === "Descurtir") {
-      this.postService.getPostById(post.idDoPost).subscribe(
-        data => {
-          this.auxPost = data;
-          this.auxPost.curtidas--;
-          this.curtida.idPostCurtido = post.idDoPost;
-          this.curtida.idUsuarioCurtiu = +(localStorage.getItem("idUsuario"));
-          this.postService.atualizarPost(this.auxPost).subscribe();
-          this.curtidaService.deleteCurtida(+(localStorage.getItem("idUsuario")),this.auxPost.id).subscribe();
-          this.ngOnInit(); 
-        }
-      )
-    }
-  }
-
-  like(){
-    this.postService.getPosts(localStorage.getItem("emailPerfil")).subscribe(
-      data => {  
-        if (this.listaPostPessoa.length > 0) {
-          this.listaPostPessoa.splice(0, data.length);
-        }      
-        
-        for (var i = 0; i < data.length; i++) {
-          let postPessoa = new PostPessoa();
-          postPessoa.idDoPost = data[i].id;
-          postPessoa.conteudo = data[i].conteudo;
-          postPessoa.emailAutor = data[i].emailAutor;
-          postPessoa.curtidas = data[i].curtidas;
-          this.curtidaService.verificarCurtida(+(localStorage.getItem("idUsuario")),  postPessoa.idDoPost)
-          .subscribe(
-            x => {
-              if(x) {
-                postPessoa.status = this.status[0];
-              } else {
-                postPessoa.status = this.status[1];
-              }
-            }
-          );          
-          this.listaPostPessoa.push(postPessoa);
-        }
-        this.temPost = this.verificarPost(); 
-      }            
-    );
   }
   
   getPessoa() {
@@ -181,14 +107,6 @@ export class PerfilComponent implements OnInit {
         this.seguidores = data;   
       }      
     )
-  }
-
-  verificarPost(){
-    if(this.listaPostPessoa.length == 0){
-      return false;
-    } else {
-      return true;
-    }
   }
 
   verificarPessoa() {

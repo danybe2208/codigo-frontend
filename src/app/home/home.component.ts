@@ -33,7 +33,8 @@ export class HomeComponent implements OnInit {
       interesses: null,
       trabalho: null,
       seguindo: null,
-      seguidores: null
+      seguidores: null,
+      postsCurtidos: null,
     }
   }
 

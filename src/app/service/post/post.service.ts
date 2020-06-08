@@ -9,14 +9,30 @@ import { Post } from 'src/app/model/post/post';
 export class PostService {
   
   criarPost = "https://server-d.herokuapp.com/post/criar";
-  listaPostPorEmail = "https://server-d.herokuapp.com/post/listaPorEmailAutor/";
+  listaPostPorEmail = "https://server-d.herokuapp.com/post/listaTodosPorEmail/";
   listarTodosPosts = "https://server-d.herokuapp.com/post/listaTodos"
 
   buscaPostPorId = "https://server-d.herokuapp.com/post/listaPorId/";
   editarPost = "https://server-d.herokuapp.com/post/editarPost/";
   deletarPost = "https://server-d.herokuapp.com/post/deletaPost/";
 
+  analisaPost = "https://server-d.herokuapp.com/post/analisaPost/";
+  curtir = "https://server-d.herokuapp.com/post/curtir/";
+  undoCurtir = "https://server-d.herokuapp.com/post/undoCurtir/";
+
   constructor(private http: HttpClient) { }
+
+  undoCurtirPost(idPessoaCurtiu: number, idPostCurtido: number): Observable<any>{
+    return this.http.get<any>(this.undoCurtir + idPessoaCurtiu + "/" + idPostCurtido);
+  }
+
+  curtirPost(idPessoaCurtiu: number, idPostCurtido: number): Observable<any>{
+    return this.http.get<any>(this.curtir + idPessoaCurtiu + "/" + idPostCurtido);
+  }
+
+  analisarPost(idPost: number, idPessoa: number): Observable<any>{
+    return this.http.get<any>(this.analisaPost + idPost + "/" + idPessoa);
+  }
 
   getPostById(idPost: number): Observable<any>{
     return this.http.get<any>(this.buscaPostPorId + idPost);

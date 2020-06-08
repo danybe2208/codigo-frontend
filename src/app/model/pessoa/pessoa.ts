@@ -8,8 +8,9 @@ export class Pessoa{
     trabalho: Trabalho;
 
     interesses: string;
-    seguindo: string;
-    seguidores: string;
+    seguindo: any;
+    seguidores: any;
+    postsCurtidos: any;
 }
 
 export class Curriculo {

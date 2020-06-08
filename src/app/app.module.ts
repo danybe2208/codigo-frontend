@@ -18,6 +18,8 @@ import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { TopicosComponent } from './topicos/topicos.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PostComponent } from './post/post.component';
+import { ListaPostComponent } from './lista-post/lista-post.component';
+import { PostPerfilComponent } from './post-perfil/post-perfil.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { PostComponent } from './post/post.component';
     EditarPerfilComponent,
     TopicosComponent,
     PerfilComponent,
-    PostComponent
+    PostComponent,
+    ListaPostComponent,
+    PostPerfilComponent
   ],
   imports: [
     HttpClientModule,

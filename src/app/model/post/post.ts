@@ -3,6 +3,8 @@ export class Post{
     conteudo: Conteudo;
     emailAutor: string;
     curtidas: number;
+    pessoasCurtiram: any;
+    status: string;
 }
 
 export class Conteudo{
