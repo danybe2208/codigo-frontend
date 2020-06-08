@@ -36,8 +36,6 @@ export class PostPerfilComponent implements OnInit {
   }
 
   botao(idPostCurtido: number){
-    console.log(idPostCurtido)
-    console.log(this.status);
     if(this.status == "Curtir"){
       this.postService.curtirPost(+(localStorage.getItem("idUsuario")), idPostCurtido).subscribe(
         data => {
