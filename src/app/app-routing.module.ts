@@ -8,6 +8,7 @@ import { ListaMembrosComponent } from './lista-membros/lista-membros.component';
 import { EditarPerfilComponent } from './editar-perfil/editar-perfil.component';
 import { TopicosComponent } from './topicos/topicos.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { ArtigoComponent } from './artigo/artigo.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"editar", component: EditarPerfilComponent, canActivate: [AuthGuard]},
   {path:"topicos", component: TopicosComponent, canActivate: [AuthGuard]},
   {path:"perfil", component: PerfilComponent, canActivate: [AuthGuard]},
+  {path:"artigos", component: ArtigoComponent, canActivate: [AuthGuard]},
 
   {path: '**', redirectTo: ''}
 ];

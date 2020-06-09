@@ -20,6 +20,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { PostComponent } from './post/post.component';
 import { ListaPostComponent } from './lista-post/lista-post.component';
 import { PostPerfilComponent } from './post-perfil/post-perfil.component';
+import { ArtigoComponent } from './artigo/artigo.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { PostPerfilComponent } from './post-perfil/post-perfil.component';
     PerfilComponent,
     PostComponent,
     ListaPostComponent,
-    PostPerfilComponent
+    PostPerfilComponent,
+    ArtigoComponent
   ],
   imports: [
     HttpClientModule,

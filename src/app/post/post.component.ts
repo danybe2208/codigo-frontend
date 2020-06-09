@@ -15,9 +15,6 @@ export class PostComponent implements OnInit {
   temPost: boolean = true;
 
   post: Post = new Post();
-  conteudo: Conteudo = new Conteudo();
-
-  auxConteudo: Conteudo = new Conteudo();
   auxPost: Post = new Post();
 
   constructor(private postService: PostService, private pessoaService: PessoaService) { 
@@ -37,13 +34,10 @@ export class PostComponent implements OnInit {
   }
 
   onSubmit(){
-    if (this.conteudo.titulo != null &&
-      this.conteudo.conteudo != null &&
-      this.conteudo.localDaPublicacao != null &&
-      this.conteudo.anoDaPublicacao != null) {
+    if (this.post.mensagem != "" && this.post.mensagem != null) {
         this.post.curtidas = 0;
         this.post.emailAutor = localStorage.getItem("email");
-        this.post.conteudo = this.conteudo;
+        
         this.postService.setPost(this.post).subscribe(
           data => {
             this.listaPosts.push(data);
@@ -52,6 +46,7 @@ export class PostComponent implements OnInit {
             } else {
               this.temPost = true;
             }
+            this.post.mensagem = "";
           }
         );
     }
@@ -60,14 +55,12 @@ export class PostComponent implements OnInit {
   getPost(post: Post){
     this.postService.getPostById(post.id).subscribe(
       data => {
-        this.auxConteudo = data.conteudo;
         this.auxPost = data;
       }
     );
   }
 
   editar(){
-    this.auxPost.conteudo = this.auxConteudo
     this.postService.atualizarPost(this.auxPost).subscribe(
       data => {
         this.postService.getPosts(localStorage.getItem("email")).subscribe(

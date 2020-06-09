@@ -6,7 +6,7 @@
     
     <div class="container row">
         <div class="col-md-8 text-light">
-            <h5 class="mb-3">Post</h5>
+            <h5 class="mb-3">Mensagem</h5>
             <app-post></app-post>
         </div>
     
@@ -24,6 +24,7 @@
                     {{trabalho?.estadoOndeTrabalha}}</span><br>
                 <span><b>Curriculo Lattes:</b> {{curriculo?.url}}</span><br>
             </div>
+
             <div *ngIf="!cientista" class=" text-light">
                 <span><b>{{informacao?.nomePessoa}}</b></span><br>
                 <span><b>{{informacao?.email}}</b></span><br>
@@ -90,6 +91,5 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
             </div>
         </div>
-
     </div>
 </div>
