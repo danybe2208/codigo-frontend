@@ -31,4 +31,8 @@ export class ArtigoService {
   atualizaArtigo(artigo: Artigo): Observable<any>{
     return this.http.put<any>(this.updateArtigo, artigo);
   }
+
+  removeArtigo(artigo: Artigo): Observable<any>{
+    return this.http.delete<any>(this.deleteArtigo + artigo.id);
+  }
 }

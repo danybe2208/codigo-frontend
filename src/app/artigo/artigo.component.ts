@@ -36,6 +36,7 @@ export class ArtigoComponent implements OnInit {
           this.conteudo.tags = "";
           this.conteudo.titulo = "";
           this.conteudo.url = "";
+          this.getArtigos();
         }
       );      
     }    
@@ -66,11 +67,19 @@ export class ArtigoComponent implements OnInit {
       this.artigo.conteudo = this.auxConteudo;
       this.artigoService.atualizaArtigo(this.artigo).subscribe(
         data =>{
-          console.log(data);
           this.getArtigos();
         }
       );
     }  
+  }
+
+  excluir(){
+    this.artigoService.removeArtigo(this.artigo).subscribe(
+      data => {
+        console.log(data)
+        this.getArtigos();
+      }
+    );
   }
 
 }
