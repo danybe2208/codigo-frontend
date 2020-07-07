@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho, Informacao } from '../model/pessoa/pessoa';
+import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho, Informacao, Notificacao } from '../model/pessoa/pessoa';
 import { PessoaService } from '../service/pessoa/pessoa.service';
 import { PostService } from '../service/post/post.service';
 
@@ -31,6 +31,10 @@ export class PaginaInicialComponent implements OnInit {
   seguindo = [];
   seguidores = [];
 
+  listaDeNotificacao = [];
+  notificacoes = [];
+  temNotificacao = false;
+
   constructor(private pessoaService: PessoaService, private postService: PostService) {
     this.postService.getPosts(localStorage.getItem("email")).subscribe(
       data => {
@@ -42,6 +46,7 @@ export class PaginaInicialComponent implements OnInit {
 
   ngOnInit() {
     this.getPessoa();  
+    this.getNotificacao();
   }
 
   getPessoa() {
@@ -78,11 +83,13 @@ export class PaginaInicialComponent implements OnInit {
           this.tempoEmAtividade = final2.toString() + " ano(s)";
         }
 
-        if (data.interesses === "" || data.interesses === null) {
+        console.log(data.interesses);
+
+        if (this.pessoa.interesses == null || this.pessoa.interesses.length == 0) {
           this.temInteresses = false;
         } else {
           this.temInteresses = true;
-          this.interesses = this.pessoa.interesses.split(",");
+          this.interesses = this.pessoa.interesses;
         }
         this.getSeguindo(data.id);
         this.getSeguidores(data.id);
@@ -123,6 +130,30 @@ export class PaginaInicialComponent implements OnInit {
     } else {
       return false;
     }    
+  }
+
+  getNotificacao(){
+    this.pessoaService.getNotificacao(localStorage.getItem("email")).subscribe(
+      data => {
+        this.listaDeNotificacao = data;
+        if(this.listaDeNotificacao.length > 0){
+          for (let i = 0; i < this.listaDeNotificacao.length; i++) {
+            if(this.listaDeNotificacao[i].tipoPublicacao != null && this.listaDeNotificacao[i].visualizacao == false){              
+              let notificacao: Notificacao = new Notificacao();
+              notificacao.tipoPublicacao = this.listaDeNotificacao[i].tipoPublicacao;
+              notificacao.titulo = this.listaDeNotificacao[i].titulo;
+              notificacao.autor = this.listaDeNotificacao[i].autor;
+              notificacao.visualizacao = this.listaDeNotificacao[i].visualizacao;
+              this.notificacoes.unshift(notificacao);
+            }
+          }
+        }      
+        if(this.notificacoes.length > 0){
+          this.temNotificacao = true;
+        } 
+        console.log(this.notificacoes)
+      }
+    );
   }
 
 }

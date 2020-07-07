@@ -11,7 +11,6 @@ import { PessoaService } from '../service/pessoa/pessoa.service';
 })
 export class HomeComponent implements OnInit {
   
-  pessoa: Pessoa = new Pessoa();
   p: Pessoa = new Pessoa();
 
   informacao: Informacao = new Informacao();
@@ -24,13 +23,14 @@ export class HomeComponent implements OnInit {
       email: new FormControl(),
       senha: new FormControl()
     });
-    this.pessoa = {
+    this.p = {
       id: null,
-      informacao: null,
+      email: "",
+      informacao: this.informacao,
       curriculo: null,
       formacao: null,
       infoAdicionais: null,
-      interesses: null,
+      interesses: [],
       trabalho: null,
       seguindo: null,
       seguidores: null,
@@ -42,17 +42,19 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit(){
-    this.informacao.email = this.form.get("email").value;
+    this.p.email = this.form.get("email").value;
     this.informacao.senha = this.form.get("senha").value;
+
+    console.log(this.p)
     
-    this.pessoaService.getPessoaByEmail(this.informacao.email).subscribe(
+    this.pessoaService.getPessoaByEmail(this.p.email).subscribe(
       x => {
-        this.pessoa = x;
-        this.loginService.login(this.pessoa).subscribe(
+        this.p = x;
+        this.loginService.login(this.p).subscribe(
           data => {
             if (data) {
-              localStorage.setItem("email", this.informacao.email);
-              localStorage.setItem("idUsuario", this.pessoa.id.toString());
+              localStorage.setItem("email", this.p.email);
+              localStorage.setItem("idUsuario", this.p.id.toString());
               this.router.navigateByUrl("home");
             } else {        
               this.msgError = true;

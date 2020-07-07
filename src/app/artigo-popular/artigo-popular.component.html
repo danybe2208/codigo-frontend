@@ -1,0 +1,30 @@
+<app-menu-lateral></app-menu-lateral>
+
+<div class="main">
+    <h4 class="text-light">Artigos mais populares</h4>
+    <hr style="border: 1px solid whitesmoke;">
+    <div class="container text-dark">
+        <br>
+        <div *ngFor="let artigo of listaArtigo">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{artigo.conteudo?.titulo}}</h4>
+                    <hr>
+                    <h5 class="card-text">Resumo do artigo</h5>
+                    <p class="card-text">{{artigo.conteudo?.resumo}}</p>
+                    <hr>
+                    <p class="card-text">{{artigo.conteudo?.localDaPublicacao}}, {{artigo.conteudo?.anoDaPublicacao}}</p>
+                    <b><p class="card-text">{{artigo?.curtidas}} curtidas</p></b>
+                    <hr>
+                    <div class="m-1 btn-group" *ngFor="let i of listaTags">
+                        <button class="btn btn-dark" disabled>{{i}}</button>
+                    </div> 
+                    <hr>
+                    <p class="card-text">{{artigo.conteudo?.url}}</p>
+                    <p class="card-text">{{artigo.arquivo?.docName}}</p>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>

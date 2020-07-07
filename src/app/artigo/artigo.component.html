@@ -7,17 +7,22 @@
     <form (ngSubmit)="onSubmit()" ngNativeValidate>
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Titulo" name="titulo" [(ngModel)]="conteudo.titulo"
-                required="true">
+                [required]="true">
         </div>        
 
         <div class="form-group">
+            <textarea type="text" class="form-control" placeholder="Resumo do artigo" name="resumo" 
+            [(ngModel)]="conteudo.resumo" [required]="true"></textarea>
+        </div>    
+
+        <div class="form-group">
             <input placeholder="Local da publicação" type="text" class="form-control" name="localDaPublicacao"
-                [(ngModel)]="conteudo.localDaPublicacao" required="true">
+                [(ngModel)]="conteudo.localDaPublicacao" [required]="true">
         </div>
 
         <div class="form-group">
             <input placeholder="Ano da publicacao" class="form-control" type="text" name="anoDaPublicacao"
-                [(ngModel)]="conteudo.anoDaPublicacao" required="true">
+                [(ngModel)]="conteudo.anoDaPublicacao" [required]="true">
         </div>
 
         <div class="form-group">
@@ -26,7 +31,13 @@
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="conteudo.tags" name="tags" placeholder="Tags">
+            <input type="text" class="form-control" [(ngModel)]="conteudo.tags" name="tags" 
+            placeholder="Tags [Obs.: Separe as tags por vírgula]">
+        </div>
+
+        <div class="form-group text-light">
+            <input type=file (change)=onFileChanged($event)>
+            <img [src]="imgURL" height=200 *ngIf="imgURL">
         </div>
         <button class="btn btn-primary" type="submit">Postar artigo</button>
     </form>
@@ -39,10 +50,20 @@
         <div *ngFor="let artigo of listaArtigo">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-text">{{artigo.conteudo?.titulo}}</p>
-                    <p class="card-text">{{artigo.conteudo?.localDaPublicacao}}</p>
-                    <p class="card-text">{{artigo.conteudo?.anoDaPublicacao}}</p>
+                    <h4 class="card-title">{{artigo.conteudo?.titulo}}</h4>
+                    <hr>
+                    <h5 class="card-text">Resumo do artigo</h5>
+                    <p class="card-text">{{artigo.conteudo?.resumo}}</p>
+                    <hr>
+                    <p class="card-text">{{artigo.conteudo?.localDaPublicacao}}, {{artigo.conteudo?.anoDaPublicacao}}</p>
+                    <b><p class="card-text">{{artigo?.curtidas}} curtidas</p></b>
+                    <hr>
+                    <div class="m-1 btn-group" *ngFor="let i of listaTags">
+                        <button class="btn btn-dark" disabled>{{i}}</button>
+                    </div>                    
+                    <hr>
                     <p class="card-text">{{artigo.conteudo?.url}}</p>
+                    <p class="card-text">{{artigo.arquivo?.docName}}</p>
                 </div>
                 <div class="card-footer text-muted">
                     <div class="btn-group float-right" role="group">

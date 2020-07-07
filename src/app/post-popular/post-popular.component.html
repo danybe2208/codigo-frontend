@@ -1,0 +1,23 @@
+<app-menu-lateral></app-menu-lateral>
+
+<div class="main">
+    <h4 class="text-light">Mensagens mais populares</h4>
+    <hr style="border: 1px solid whitesmoke;">
+
+    <h6 class="text-light" *ngIf="!temPost">Não há posts</h6>
+
+    <div class="container text-dark" *ngIf="temPost">
+        <br>
+        <div *ngFor="let p of listaPosts">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-text">{{p?.mensagem}}</p>
+                </div>
+                <div class="card-footer text-muted">
+                    Curtido por {{p?.curtidas}} membros
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>

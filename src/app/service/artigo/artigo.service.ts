@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class ArtigoService {
 
-  createArtigo = "https://server-d.herokuapp.com/artigo/criaArtigo/";
+  createArtigo = "https://server-d.herokuapp.com/artigo/criaArtigo";
+  createArquivo = "https://server-d.herokuapp.com/artigo/arquivo/";
   readAllArtigoByEmail = "https://server-d.herokuapp.com/artigo/listaPorEmail/";
   readByIdArtigo = "https://server-d.herokuapp.com/artigo/procuraArtigoPorId/";
   updateArtigo = "https://server-d.herokuapp.com/artigo/atualizaArtigo";
@@ -18,6 +19,10 @@ export class ArtigoService {
 
   criaArtigo(artigo: Artigo): Observable<any>{
     return this.http.post<any>(this.createArtigo, artigo);
+  }
+
+  criaArquivo(id: number, formData: FormData): Observable<any> {
+    return this.http.post<any>(this.createArquivo + id, formData);
   }
 
   buscaArtigoPorEmail(email: string): Observable<any[]>{

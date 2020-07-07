@@ -21,6 +21,8 @@ import { PostComponent } from './post/post.component';
 import { ListaPostComponent } from './lista-post/lista-post.component';
 import { PostPerfilComponent } from './post-perfil/post-perfil.component';
 import { ArtigoComponent } from './artigo/artigo.component';
+import { ArtigoPopularComponent } from './artigo-popular/artigo-popular.component';
+import { PostPopularComponent } from './post-popular/post-popular.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ArtigoComponent } from './artigo/artigo.component';
     PostComponent,
     ListaPostComponent,
     PostPerfilComponent,
-    ArtigoComponent
+    ArtigoComponent,
+    ArtigoPopularComponent,
+    PostPopularComponent
   ],
   imports: [
     HttpClientModule,

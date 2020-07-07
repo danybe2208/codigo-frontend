@@ -42,6 +42,8 @@ export class PerfilComponent implements OnInit {
     this.pessoaService.getPessoaByEmail(localStorage.getItem("emailPerfil")).subscribe(
       data => {
         this.pessoa = data;
+
+        console.log(this.pessoa);
         
         this.curriculo = data.curriculo;
 
@@ -72,16 +74,16 @@ export class PerfilComponent implements OnInit {
           this.tempoEmAtividade = final2.toString() + " ano(s)";
         }
 
-        if (data.interesses == "" || data.interesses == null) {
+        if (this.pessoa.interesses == null || this.pessoa.interesses.length == 0) {
           this.temInteresses = false;
         } else {
           this.temInteresses = true;
-          this.interesses = this.pessoa.interesses.split(",");
-        }     
+          this.interesses = this.pessoa.interesses;
+        }    
 
-        this.getSeguindo(data.id);
-        this.getSeguidores(data.id);
-        this.verificarFollow(data.id); 
+        this.getSeguindo(this.pessoa.id);
+        this.getSeguidores(this.pessoa.id);
+        this.verificarFollow(this.pessoa.id); 
 
         this.cientista = this.verificarPessoa();           
       }

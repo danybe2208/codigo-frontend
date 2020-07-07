@@ -1,10 +1,9 @@
-<div class="modal-dialog ">
+<div class="modal-dialog" >
     <div class="modal-content bg-secondary">
 
         <!-- Modal Header -->
         <div class="modal-header text-light">
             <h4 class="modal-title">Criar sua conta</h4>
-            <button type="button" class="close text-light" data-dismiss="modal">&times;</button>
         </div>
 
         <!-- Modal body -->
@@ -16,6 +15,12 @@
                 </div>
                 <div *ngIf="sucesso" class="alert alert-success m-3">
                     Perfil cadastrado com sucesso.
+                </div>
+                <div *ngIf="!nacionalidade" class="alert alert-warning m-3">
+                    Não é permitido o cadastro de estrangeiros.
+                </div>
+                <div *ngIf="!maiorDeIdade" class="alert alert-warning m-3">
+                    Não é permitido o cadastro de menores de idade.
                 </div>
                 <div class="navbar" *ngIf="!sucesso">
                     <div class="row">
@@ -33,6 +38,9 @@
                 </div>
 
                 <div *ngIf="!sucesso">
+                    <input type="checkbox" id="nacionalidade" value="Sou brasileiro" (click)="eventCheck($event.target)" checked/>                    
+                    <label for="nacionalidade" class="text-light">Sou brasileiro</label>
+
                     <form *ngIf="cientista" ngNativeValidate class="mt-2">
 
                         <!--Cadatro de cientistas-->
@@ -43,7 +51,7 @@
                             </div>
                             
                             <div class="form-group row">
-                                <input type="email" class="form-control" name="email" [(ngModel)]="informacao.email" placeholder="Email"
+                                <input type="email" class="form-control" name="email" [(ngModel)]="pessoa.email" placeholder="Email"
                                     required="true">
                             </div>
                             
@@ -109,7 +117,6 @@
 
                 <div *ngIf="!sucesso">
                     <form *ngIf="!cientista" ngNativeValidate class="mt-2">
-
                         <!--Cadatro de usuario comum-->
                         <div class="container">
                             <div class="form-group row">
@@ -118,7 +125,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <input type="email" class="form-control" name="email" [(ngModel)]="informacao.email"
+                                <input type="email" class="form-control" name="email" [(ngModel)]="pessoa.email"
                                     placeholder="Email" required="true">
                             </div>
 
@@ -165,7 +172,7 @@
 
         <!-- Modal footer -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="fechar()">Fechar</button>
         </div>
 
     </div>

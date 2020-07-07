@@ -27,7 +27,6 @@ export class EditarPerfilComponent implements OnInit {
 
   confirmarAtualizacao(){    
     if(this.informacao.nomePessoa != null &&
-      this.informacao.email != null &&
       this.informacao.senha != null &&
       this.infoAdicionais.dataNascimento != null &&
       this.formacao.nivelDeFormacao != null &&

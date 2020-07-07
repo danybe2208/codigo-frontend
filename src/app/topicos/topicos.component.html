@@ -16,9 +16,9 @@
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let i of glossarios | filter: searchText | paginate: { itemsPerPage: 10, currentPage: p }">
+                <tbody *ngFor="let i of interesses | filter: searchText | paginate: { itemsPerPage: 10, currentPage: p }">
                     <tr>
-                        <td>{{i}}</td>
+                        <td>{{i.nome}}</td>
                         <td>
                             <button class="btn btn-dark" (click)="adicionar(i)">Adicionar</button>
                         </td>
@@ -41,8 +41,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let i of selecionados">
-                            <td *ngIf="!jaTemInteresse">{{i}}</td>
-                            <td *ngIf="!jaTemInteresse">
+                            <td>{{i.nome}}</td>
+                            <td>
                                 <button class="btn btn-dark" (click)="remover(i)">Remover</button>
                             </td>
                         </tr>

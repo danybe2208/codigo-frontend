@@ -6,7 +6,10 @@
             <a routerLink="/membros">Ver outros membros</a>
             <a routerLink="/editar">Editar meu perfil</a>
             <a routerLink="/topicos">Tópicos de interesses</a> 
-            <a routerLink="/artigos">Artigos</a>           
+            <a *ngIf="cientista" routerLink="/artigos">Artigos</a>  
+            <hr style="border: 1px solid whitesmoke;">
+            <a *ngIf="cientista" routerLink="/artigo-popular">Artigos mais populares</a>     
+            <a routerLink="/post-popular">Mensagens mais populares</a>    
             <div class="footer">                
                 <a routerLink="/login" role="button" (click)="logout()">Sair</a>
             </div>

@@ -1,5 +1,8 @@
+import { Interesse } from '../interesse/interesse';
+
 export class Pessoa{
     id: number;
+    email: string;
 
     curriculo: Curriculo;
     formacao: Formacao;
@@ -7,7 +10,7 @@ export class Pessoa{
     informacao: Informacao;  
     trabalho: Trabalho;
 
-    interesses: string;
+    interesses: Interesse[];
     seguindo: any;
     seguidores: any;
     postsCurtidos: any;
@@ -30,7 +33,6 @@ export class InfoAdicionais {
 
 export class Informacao{
     nomePessoa: string;
-    email: string;
     senha: string;
 }
 
@@ -43,4 +45,11 @@ export class Trabalho{
     nomeInstituicao: string;
     cidadeOndeTrabalha: string;
     estadoOndeTrabalha: string;
+}
+
+export class Notificacao{
+    tipoPublicacao: string;
+    titulo: string;
+    autor: String;
+    visualizacao: boolean;
 }

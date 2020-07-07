@@ -22,17 +22,23 @@ export class PessoaService {
   unfollow = "https://server-d.herokuapp.com/cientista/unfollow/"
   verificaFollow = "https://server-d.herokuapp.com/cientista/verificaFollow/"
 
+  notificacao = "https://server-d.herokuapp.com/cientista/notificacao/";
+
   constructor(private http: HttpClient) { }
 
   login(pessoa: Pessoa): Observable<any>{
     return this.http.post<any>(this.url  + "/login", pessoa)
     .pipe(map(data =>{
       if (data != null){
-        localStorage.setItem("email", pessoa.informacao.email);
+        localStorage.setItem("email", pessoa.email);
         return true;
       }
       return false;
     }))
+  }
+
+  getNotificacao(email: string): Observable<any[]>{
+    return this.http.get<any[]>(this.notificacao + email);
   }
 
   getPessoaByEmail(email: string): Observable<any>{

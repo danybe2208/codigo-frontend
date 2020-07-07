@@ -14,6 +14,28 @@
             <h5 class="mb-3 text-light">Meu perfil</h5>
             <div *ngIf="cientista" class=" text-light">
                 <span><b>{{informacao?.nomePessoa}}</b></span><br>
+                
+                <button class="btn btn-outline-light btn-block dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Notificação
+                </button>
+                <div *ngIf="temNotificacao">
+                    <div class="dropdown-menu" style="max-height: 200px; max-width: 400px; min-width: 340px; overflow: auto;"
+                        aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" *ngFor="let n of notificacoes" type="button">
+                            <b>Titulo:</b> {{n?.titulo}} <br>
+                            {{n?.autor}}
+                            <hr>
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="!temNotificacao">
+                    <div class="dropdown-menu"
+                        aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item" type="button">Sem notificações</button>
+                    </div>
+                </div>
+
                 <span><b>{{informacao?.email}}</b></span><br>
                 <span><b>Nivel de formação: </b>{{formacao?.nivelDeFormacao}}</span><br>
                 <span><b>Local de formação: </b>{{formacao?.localDeFormacao}}</span><br>
@@ -22,7 +44,6 @@
                 <span><b>Nome da instituição: </b>{{trabalho?.nomeInstituicao}}</span><br>
                 <span><b>Local da instituição: </b>{{trabalho?.cidadeOndeTrabalha}} -
                     {{trabalho?.estadoOndeTrabalha}}</span><br>
-                <span><b>Curriculo Lattes:</b> {{curriculo?.url}}</span><br>
             </div>
 
             <div *ngIf="!cientista" class=" text-light">
@@ -41,10 +62,10 @@
                 Seguidores
             </button>
 
-            <h6 class="mt-3 text-light">Interesses:</h6>
+            <h6 class="mt-3 text-light">Meus interesses:</h6>
             <div *ngIf="temInteresses">
                 <ul class="list-group" *ngFor="let x of interesses;">
-                    <li class="list-group-item">{{x}}</li>
+                    <li class="list-group-item">{{x.nome}}</li>
                 </ul>
             </div>
             <div class="text-light" *ngIf="!temInteresses">
