@@ -8,12 +8,12 @@
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Titulo" name="titulo" [(ngModel)]="conteudo.titulo"
                 [required]="true">
-        </div>        
+        </div>
 
         <div class="form-group">
-            <textarea type="text" class="form-control" placeholder="Resumo do artigo" name="resumo" 
-            [(ngModel)]="conteudo.resumo" [required]="true"></textarea>
-        </div>    
+            <textarea type="text" class="form-control" placeholder="Resumo do artigo" name="resumo"
+                [(ngModel)]="conteudo.resumo" [required]="true"></textarea>
+        </div>
 
         <div class="form-group">
             <input placeholder="Local da publicação" type="text" class="form-control" name="localDaPublicacao"
@@ -31,8 +31,8 @@
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="conteudo.tags" name="tags" 
-            placeholder="Tags [Obs.: Separe as tags por vírgula]">
+            <input type="text" class="form-control" [(ngModel)]="conteudo.tags" name="tags"
+                placeholder="Tags [Obs.: Separe as tags por vírgula]">
         </div>
 
         <div class="form-group text-light">
@@ -55,12 +55,15 @@
                     <h5 class="card-text">Resumo do artigo</h5>
                     <p class="card-text">{{artigo.conteudo?.resumo}}</p>
                     <hr>
-                    <p class="card-text">{{artigo.conteudo?.localDaPublicacao}}, {{artigo.conteudo?.anoDaPublicacao}}</p>
-                    <b><p class="card-text">{{artigo?.curtidas}} curtidas</p></b>
+                    <p class="card-text">{{artigo.conteudo?.localDaPublicacao}}, {{artigo.conteudo?.anoDaPublicacao}}
+                    </p>
+                    <b>
+                        <p class="card-text">{{artigo?.curtidas}} curtidas</p>
+                    </b>
                     <hr>
                     <div class="m-1 btn-group" *ngFor="let i of listaTags">
                         <button class="btn btn-dark" disabled>{{i}}</button>
-                    </div>                    
+                    </div>
                     <hr>
                     <p class="card-text">{{artigo.conteudo?.url}}</p>
                     <p class="card-text">{{artigo.arquivo?.docName}}</p>
@@ -69,7 +72,7 @@
                     <div class="btn-group float-right" role="group">
                         <button type="button" class="btn btn-dark" (click)="getArtigo(artigo)" data-toggle="modal"
                             data-target="#editar">Editar</button>
-    
+
                         <button type="button" class="btn btn-dark" (click)="getArtigo(artigo)" data-toggle="modal"
                             data-target="#excluir">Excluir</button>
                     </div>
@@ -81,48 +84,48 @@
 </div>
 
 <!--Modal editar-->
-    <div id="editar" class="modal fade" role="dialog">
-        <div class="modal-dialog  text-dark">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Editar artigo</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+<div id="editar" class="modal fade" role="dialog">
+    <div class="modal-dialog  text-dark">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Editar artigo</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" placeholder="Titulo" class="form-control" name="conteudo"
+                        [(ngModel)]="auxConteudo.titulo" />
                 </div>
-                <div class="modal-body">   
-                        <div class="form-group">
-                            <input type="text" placeholder="Titulo" class="form-control" name="conteudo"
-                                    [(ngModel)]="auxConteudo.titulo"/>
-                        </div>
-                        <div class="form-group">
-                            <textarea type="text" placeholder="Resumo do artigo" class="form-control" name="conteudo"
-                                    [(ngModel)]="auxConteudo.resumo"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Local da publicação" class="form-control" name="conteudo"
-                            [(ngModel)]="auxConteudo.localDaPublicacao"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Ano da publicação" class="form-control" name="conteudo"
-                            [(ngModel)]="auxConteudo.anoDaPublicacao"/>
-                        </div>                
-                        <div class="form-group">
-                            <input type="text" placeholder="Url" class="form-control" name="conteudo"
-                            [(ngModel)]="auxConteudo.url"/>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" placeholder="Tags" class="form-control" name="conteudo"
-                            [(ngModel)]="auxConteudo.tags"/>
-                        </div> 
-                </div> 
-                             
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" (click)="editar()" data-dismiss="modal">Editar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <div class="form-group">
+                    <textarea type="text" placeholder="Resumo do artigo" class="form-control" name="conteudo"
+                        [(ngModel)]="auxConteudo.resumo"></textarea>
                 </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Local da publicação" class="form-control" name="conteudo"
+                        [(ngModel)]="auxConteudo.localDaPublicacao" />
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Ano da publicação" class="form-control" name="conteudo"
+                        [(ngModel)]="auxConteudo.anoDaPublicacao" />
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Url" class="form-control" name="conteudo"
+                        [(ngModel)]="auxConteudo.url" />
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Tags" class="form-control" name="conteudo"
+                        [(ngModel)]="auxConteudo.tags" />
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" (click)="editar()" data-dismiss="modal">Editar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
+</div>
 
 <!--Modal deletar-->
 <div id="excluir" class="modal fade" role="dialog">
