@@ -14,7 +14,7 @@ export class ArtigoPerfilComponent implements OnInit {
   status: any;
   listaTags: any;
   
-  constructor(private artigoService: ArtigoService) {    
+  constructor(private artigoService: ArtigoService) {   
   }
 
   ngOnInit() {
@@ -22,8 +22,8 @@ export class ArtigoPerfilComponent implements OnInit {
     this.listaTags = this.artigo.conteudo.tags.split(",");  
   }
 
-  analisePost(idPostCurtido: number, idPessoaCurtiu: number){
-    this.artigoService.analisarArtigo(idPostCurtido, idPessoaCurtiu).subscribe(
+  analiseArtigo(idArtigoCurtido: number, idPessoaCurtiu: number){
+    this.artigoService.analisarArtigo(idArtigoCurtido, idPessoaCurtiu).subscribe(
       data => {
         if(data){
           this.status = "Descurtir";
@@ -31,11 +31,11 @@ export class ArtigoPerfilComponent implements OnInit {
           this.status = "Curtir";
         }
       }
-    )
+    );
   }
 
   verificar(){
-    this.analisePost(this.artigo.id, +(localStorage.getItem("idUsuario")));
+    this.analiseArtigo(this.artigo.id, +(localStorage.getItem("idUsuario")));
   }
 
   botao(idPostCurtido: number){
@@ -43,14 +43,14 @@ export class ArtigoPerfilComponent implements OnInit {
       this.artigoService.curtirArtigo(+(localStorage.getItem("idUsuario")), idPostCurtido).subscribe(
         data => {
           this.artigo = data;
-          this.analisePost(this.artigo.id ,+(localStorage.getItem("idUsuario")));
+          this.analiseArtigo(this.artigo.id ,+(localStorage.getItem("idUsuario")));
         }
       );
     } else if (this.status == "Descurtir") {
       this.artigoService.undoCurtirArtigo(+(localStorage.getItem("idUsuario")), idPostCurtido).subscribe(
         data => {
-          this.artigoService = data;
-          this.analisePost(this.artigo.id ,+(localStorage.getItem("idUsuario")));
+          this.artigo = data;
+          this.analiseArtigo(this.artigo.id ,+(localStorage.getItem("idUsuario")));
         }
       );
     }

@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ArtigoService {
   
+  
   createArtigo = "https://server-d.herokuapp.com/artigo/criaArtigo";
   createArquivo = "https://server-d.herokuapp.com/artigo/arquivo/";
   readAllArtigoByEmail = "https://server-d.herokuapp.com/artigo/listaPorEmail/";
@@ -22,7 +23,7 @@ export class ArtigoService {
   constructor(private http: HttpClient) { }
 
   analisarArtigo(idArtigoCurtido: number, idPessoaCurtiu: number) : Observable<any>{
-    return this.http.get<any>(this.analisaArtigo + idArtigoCurtido + "/" + idPessoaCurtiu);
+    return this.http.get<any>("https://server-d.herokuapp.com/artigo/analisaArtigo/" + idArtigoCurtido + "/" + idPessoaCurtiu);
   }
 
   undoCurtirArtigo(idPessoaCurtiu: number, idArtigoCurtido: number): Observable<any>{
