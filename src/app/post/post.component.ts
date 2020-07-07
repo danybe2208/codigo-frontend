@@ -20,7 +20,7 @@ export class PostComponent implements OnInit {
   constructor(private postService: PostService, private pessoaService: PessoaService) { 
     this.postService.getPosts(localStorage.getItem("email")).subscribe(
       data => {
-        this.listaPosts = data;
+        this.listaPosts = data.reverse();
         if(data.length == 0){
           this.temPost = false;
         } else {

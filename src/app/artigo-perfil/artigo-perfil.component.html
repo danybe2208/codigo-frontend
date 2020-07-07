@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">{{artigo.conteudo?.titulo}}</h4>
+            <hr>
+            <h5 class="card-text">Resumo do artigo</h5>
+            <p class="card-text">{{artigo.conteudo?.resumo}}</p>
+            <hr>
+            <p class="card-text">{{artigo.conteudo?.localDaPublicacao}}, {{artigo.conteudo?.anoDaPublicacao}}</p>
+            <b><p class="card-text">{{artigo?.curtidas}} curtidas</p></b>
+            <hr>
+            <div class="m-1 btn-group" *ngFor="let i of listaTags">
+                <button class="btn btn-dark" disabled>{{i}}</button>
+            </div> 
+            <hr>
+            <p class="card-text">{{artigo.conteudo?.url}}</p>
+            <p class="card-text">{{artigo.arquivo?.docName}}</p>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-dark btn-block" (click)="botao(artigo.id)">{{status}} artigo</button>
+        </div>
+    </div>
+    <br>
+</div>

@@ -10,7 +10,7 @@ import { PessoaService } from '../service/pessoa/pessoa.service';
 })
 export class MenuLateralComponent implements OnInit {
 
-  cientista = true;
+  cientista: boolean;
 
   constructor(public authService: AuthService, private router: Router, private pessoaService: PessoaService) { }
 
@@ -21,8 +21,10 @@ export class MenuLateralComponent implements OnInit {
   verifica(){
     this.pessoaService.getPessoaByEmail(localStorage.getItem("email")).subscribe(
       data => {
-        if(data.curriculo.url == null || data.curriculo.url == ""){
+        if(data.curriculo.url == null){
           this.cientista = false;
+        } else {
+          this.cientista = true;
         }
       }
     )

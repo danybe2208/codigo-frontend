@@ -4,6 +4,7 @@ import { PessoaService } from '../service/pessoa/pessoa.service';
 import { PostService } from '../service/post/post.service';
 import { Post } from '../model/post/post';
 import { Router } from '@angular/router';
+import { ArtigoService } from '../service/artigo/artigo.service';
 
 @Component({
   selector: 'app-perfil',
@@ -31,11 +32,28 @@ export class PerfilComponent implements OnInit {
   seguindo = [];
   seguidores = [];
 
-  constructor(private pessoaService: PessoaService, private postService: PostService, private router: Router) {
+  listaArtigo = [];
+  listaTags = [];
+
+  verArtigo = false;
+  verPost = true;
+
+  constructor(private pessoaService: PessoaService, private postService: PostService, private router: Router,
+    private artigoService: ArtigoService) {
   }
 
   ngOnInit() {
-    this.getPessoa();  
+    this.getPessoa(); 
+  }
+
+  visualizarPost(){
+    this.verArtigo = false;
+    this.verPost = true;
+  }
+
+  visualizarArtigo(){
+    this.verArtigo = true;
+    this.verPost = false;
   }
   
   getPessoa() {

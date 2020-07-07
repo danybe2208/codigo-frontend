@@ -6,9 +6,21 @@
     
     <div class="container row">
         <div class="col-md-6">
-            <app-lista-post></app-lista-post>
+            <div class="container btn-group" *ngIf="cientista">
+                <button class="btn btn-light" (click)="visualizarPost()" [disabled]="verPost">Mensagens</button>
+                <button class="btn btn-light" (click)="visualizarArtigo()" [disabled]="verArtigo">Artigos</button>
+            </div>
+            <div *ngIf="verPost">
+                <app-lista-post></app-lista-post>
+            </div>
+            <div class="text-dark container" *ngIf="cientista">
+                <div *ngIf="verArtigo">
+                    <app-lista-artigo></app-lista-artigo>
+                </div>            
+            </div>
+    
         </div>
-
+        
         <div class="col-md-6" class="text-light">
             <div *ngIf="cientista">
                 <span><b>Contato: </b>{{pessoa?.email}}</span><br>
@@ -42,7 +54,7 @@
             <h6 class="mt-3 text-light">Interesses:</h6>
             <div *ngIf="temInteresses">
                 <ul class="list-group" *ngFor="let x of interesses;">
-                    <li class="list-group-item text-dark">{{x}}</li>
+                    <li class="list-group-item text-dark">{{x.nome}}</li>
                 </ul>
             </div>
             <div *ngIf="!temInteresses" class="text-light">
