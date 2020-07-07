@@ -11,7 +11,7 @@
 
         <div class="col-md-6" class="text-light">
             <div *ngIf="cientista">
-                <span><b>Contato: </b>{{informacao?.email}}</span><br>
+                <span><b>Contato: </b>{{pessoa?.email}}</span><br>
                 <span><b>Nivel de formação:</b> {{formacao?.nivelDeFormacao}}</span><br>
                 <span><b>Local de formação:</b> {{formacao?.localDeFormacao}}</span><br>
                 <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
@@ -22,7 +22,7 @@
                 <span><b>Curriculo Lattes: </b>{{curriculo?.url}}</span><br>
             </div>
             <div *ngIf="!cientista">
-                <span><b>Contato:</b> {{informacao?.email}}</span><br>
+                <span><b>Contato:</b> {{pessoa?.email}}</span><br>
                 <span><b>Nivel de formação: </b>{{formacao?.nivelDeFormacao}}</span><br>
                 <span><b>Local de formação: </b>{{formacao?.localDeFormacao}}</span><br>
                 <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
