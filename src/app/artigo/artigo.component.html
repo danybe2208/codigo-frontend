@@ -61,7 +61,7 @@
                         <p class="card-text">{{artigo?.curtidas}} curtidas</p>
                     </b>
                     <hr>
-                    <div class="m-1 btn-group" *ngFor="let i of listaTags">
+                    <div class="m-1 btn-group" *ngFor="let i of artigo.listaTags">
                         <button class="btn btn-dark" disabled>{{i}}</button>
                     </div>
                     <hr>
@@ -133,7 +133,7 @@
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Remover aartigo</h4>
+                <h4 class="modal-title">Remover artigo</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">

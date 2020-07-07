@@ -79,11 +79,12 @@ export class ArtigoComponent implements OnInit {
   getArtigos(){
     this.artigoService.buscaArtigoPorEmail(localStorage.getItem("email")).subscribe(
       data => {
-        this.listaArtigo = data;        
+        this.listaArtigo = data;
         for (let i = 0; i < this.listaArtigo.length; i++) {
-          this.listaTags = this.listaArtigo[i].conteudo.tags.split(",");  
+          if(this.listaArtigo[i].conteudo.tags != "" && this.listaArtigo[i].conteudo.tags != null){              
+            this.listaArtigo[i].listaTags = this.listaArtigo[i].conteudo.tags.split(",");              
+          }
         }
-        
       }
     )
   }
@@ -94,7 +95,7 @@ export class ArtigoComponent implements OnInit {
     this.artigoService.buscaArtigoPorId(artigo.id).subscribe(
       data => {
         this.artigo = data;
-        this.auxConteudo = data.conteudo;
+        this.auxConteudo = data.conteudo;  
       }
     )
   }
